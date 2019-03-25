@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Lit Element Starter Kit">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>Lit Element Starter Kit</title>
+  <meta name="description" content="Lit Element Starter Kit Description">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@TheDataShed">
+  <meta name="twitter:title" content="Lit Element Starter Kit">
+  <meta name="twitter:description" content="Lit Element Starter Kit Description">
+  <meta name="twitter:image" content="./images/manifest/icon-512x512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lit Element Starter Kit">
+  <meta property="og:description" content="Lit Element Starter Kit Description">
+  <meta property="og:image" content="./images/manifest/icon-512x512.png">
+  <base href="/">
+
+  <link rel="icon" href="./images/favicon.ico">
+
+  <link rel="manifest" href="./manifest.json">
+
+  <meta name="theme-color" content="#ffffff">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Lit Element Starter Kit">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Lit Element Starter Kit">
+
+  <link rel="apple-touch-icon" href="./images/manifest/icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./images/manifest/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="./images/manifest/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./images/manifest/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="./images/manifest/icon-192x192.png">
+
+  <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Set up service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./service-worker.js');
+      });
+    }
+  </script>
+
+  <!-- Load babel polyfills -->
+  <script src="./node_modules/@babel/polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Load Custom Elements es5 adapter -->
+  <script src="./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+
+  <!-- Load webcomponents to check and load any polyfills your browser needs -->
+  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+
+  <!-- Add any fonts here (recommend async loading) -->
+
+  <!-- Load system modules for IE11 -->
+  <script nomodule src="./legacy/s.min.js"></script>
+
+  <!-- Add any global styles for body, document, etc. -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      background-color: #ffffff;
+      color: #444444;
+    }
+
+    input,
+    select,
+    textarea,
+    button,
+    paper-dialog,
+    label {
+      font-family: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <app-shell></app-shell>
+  <noscript>
+    Please enable JavaScript to view this website.
+  </noscript>
+
+
+  <!-- Check if dynamic imports supported -->
+  <script type="module">
+    window.esDynamicImport = true;
+    // this will throw if dynamic import is not supported
+    import("./src/app-shell.js")
+  </script>
+
+  <!-- This will load in all the nomodule scripts for browsers that don't support lazy loading (imports not at the top level) e.g. Firefox -->
+  <script type="module">
+    if (!window.esDynamicImport) {
+      const noms = Array.prototype.slice.call(document.getElementsByTagName('script'), 0).filter((x) => x.hasAttribute('nomodule'));
+      function nextLoad(nom, s) {
+        if (!(nom = noms.shift())) return;
+        s = document.createElement('script');
+        if (nom.src)
+          s.src = nom.src, s.addEventListener('load', nextLoad), s.addEventListener('error', nextLoad);
+        else
+          s.innerHTML = nom.innerHTML;
+        document.head.appendChild(s);
+        if (!nom.src) nextLoad();
+      }
+      nextLoad();
+    }
+  </script>
+
+  <script nomodule>
+    System.import("./legacy/src/app-shell.js")
+  </script>
+</body>
+
+</html>

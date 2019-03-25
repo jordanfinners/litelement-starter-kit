@@ -1,0 +1,21 @@
+{
+  "name": "Lit Element Starter Kit",
+  "short_name": "Lit Element Starter Kit",
+  "description": "Lit Element Starter Kit Description",
+  "icons": [
+    {
+      "src": "images/manifest/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/manifest/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ff8c27",
+  "background_color": "#fffefd"
+}

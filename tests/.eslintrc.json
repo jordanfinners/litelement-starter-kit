@@ -1,0 +1,14 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "require-jsdoc": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "should|expect"
+      }
+    ]
+  }
+}
