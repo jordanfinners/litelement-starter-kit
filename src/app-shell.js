@@ -106,6 +106,9 @@ export class AppShell extends LitElement {
    * @param {PropertyValues} changedProperties map of changed properties
    */
   updated(changedProperties) {
+    if (super.updated) {
+      super.updated();
+    }
     if (changedProperties.has('routeData') && this.routeData) {
       if (this.routeData && this.routeData.params) {
         this._routePageChanged(this.routeData.params.page);

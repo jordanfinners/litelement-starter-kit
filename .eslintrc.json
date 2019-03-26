@@ -12,8 +12,7 @@
     "sourceType": "module"
   },
   "env": {
-    "browser": true,
-    "mocha": true
+    "browser": true
   },
   "rules": {
     "import/extensions": "off",
@@ -37,7 +36,6 @@
     "lit"
   ],
   "globals": {
-    "Promise": true,
     "ShadyCSS": true
   }
 }

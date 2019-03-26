@@ -6,7 +6,7 @@ import multiEntry from 'rollup-plugin-multi-entry';
 
 
 export default {
-  input: 'tests/**/**/*.test.js',
+  input: 'tests/**/*.test.js',
   output: {
     dir: 'tests/bundle',
     format: 'esm',
