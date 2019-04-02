@@ -72,8 +72,32 @@ export class AppShell extends LitElement {
     }
   }
 
-  /** Client side routing config */
+  /**
+   * Parses out the query string to an object
+   * @param {Object} context the page js context object
+   * @return {Object} the parsed query params
+   */
+  parseQueryParams(context) {
+    if (context.querystring.length === 0) {
+      return {};
+    }
+    const queryParams = {};
+    const params = new URLSearchParams(context.querystring);
+    Array.from(params.keys()).forEach((key) => {
+      queryParams[key] = params.get(key);
+    });
+    return queryParams;
+  }
+
+  /** Client side routing */
   routing() {
+    // Parses off any query strings from the url and sets a query string object
+    // url ?hi=everyone
+    // queryParams {hi: 'everyone'}
+    router('*', (context, next) => {
+      this.queryParams = this.parseQueryParams(context);
+      next();
+    });
     // Browsing to / takes you to home
     router('/', (context) => {
       const { ...routeData } = context;
@@ -84,18 +108,10 @@ export class AppShell extends LitElement {
     router('/:page', (context) => {
       this.routeData = context;
     });
-    // Parses off any query strings from the url and sets a query string object
-    // url ?hi=everyone
-    // queryParams {hi: 'everyone'}
-    router((context) => {
-      if (context.querystring.length > 0) {
-        const queryParams = {};
-        context.querystring.split('&').forEach((query) => {
-          const param = query.split('=');
-          queryParams[param[0]] = param[1];
-        });
-        this.queryParams = queryParams;
-      }
+
+    // Browsing to /home tries to take you to that page
+    router('/:page', (context) => {
+      this.routeData = context;
     });
     router();
   }

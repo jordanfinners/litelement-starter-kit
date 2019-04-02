@@ -24,4 +24,14 @@ describe('app-shell tests', () => {
     node._showPage404();
     expect(node.page).to.equal('error');
   });
+
+  it('should parse out query strings as required', () => {
+    const queryParams = node.parseQueryParams({
+      querystring: 'test=hi&foo=bar',
+    });
+    expect(queryParams).to.deep.equal({
+      test: 'hi',
+      foo: 'bar',
+    });
+  });
 });
