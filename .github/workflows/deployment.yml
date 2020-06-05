@@ -1,0 +1,24 @@
+name: deployment
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Node JS Setup
+      uses: actions/setup-node@v1
+      with:
+        node-version: '13.x'
+
+    - name: Install
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+# Add any deploy steps here
