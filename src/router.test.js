@@ -37,13 +37,13 @@ describe('router tests', () => {
       expect(result).to.equal('home');
     });
 
-    it('should send to lost page if unknown page name', () => {
+    it('should send to error page if unknown page name', () => {
       const result = validatePage('blblblblbl');
-      expect(result).to.equal('lost');
+      expect(result).to.equal('error');
     });
 
     it('should return the name of the page for valid pages', () => {
-      const pages = ['home', 'terms', 'privacy', 'profile', 'measurements', 'challenges', 'workouts', 'workouts-new', 'workout', 'progress', 'progress-view'];
+      const pages = ['home'];
       pages.forEach((page) => {
         const result = validatePage(page);
         expect(result).to.equal(page, `${page} isn't valid and being returned from the expected list of pages`);
