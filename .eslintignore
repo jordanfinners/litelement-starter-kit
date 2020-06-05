@@ -1,4 +1,4 @@
 build/
 node_modules/
-tests/bundle
+tests/bundle.js
 index.html

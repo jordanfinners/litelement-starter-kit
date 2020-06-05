@@ -1,4 +1,4 @@
-import { css } from 'lit-element/lit-element.js';
+import { css } from 'lit-element/lit-element';
 
 /* shared styles for all views */
 export const sharedStyles = css`

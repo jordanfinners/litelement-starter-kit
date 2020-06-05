@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import '../../src/pages/error-page.js';
+import './error-page';
 
 describe('error-page tests', () => {
   let node;

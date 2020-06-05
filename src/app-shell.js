@@ -1,7 +1,7 @@
-import { LitElement, html, css } from 'lit-element/lit-element.js';
-import '@polymer/iron-pages/iron-pages.js';
+import { LitElement, html, css } from 'lit-element/lit-element';
 import router from 'page/page.mjs';
-import { sharedStyles } from './shared-styles.js';
+import { parseQueryParams, validatePage, importPage } from './router';
+import { sharedStyles } from './shared-styles';
 
 /**
  * `app-shell`
@@ -28,10 +28,10 @@ export class AppShell extends LitElement {
    */
   render() {
     return html`
-            <iron-pages selected="${this.page}" attr-for-selected="name" fallback-selection="error" role="main">
-              <home-page name="home"></home-page>
-              <error-page name="error"></error-page>
-            </iron-pages>
+            <main>
+              <home-page name="home" ?hidden=${this.page !== 'home'}></home-page>
+              <error-page name="error" ?hidden=${this.page !== 'error'}></error-page>
+            </main>
 `;
   }
 
@@ -72,30 +72,13 @@ export class AppShell extends LitElement {
     }
   }
 
-  /**
-   * Parses out the query string to an object
-   * @param {Object} context the page js context object
-   * @return {Object} the parsed query params
-   */
-  parseQueryParams(context) {
-    if (context.querystring.length === 0) {
-      return {};
-    }
-    const queryParams = {};
-    const params = new URLSearchParams(context.querystring);
-    Array.from(params.keys()).forEach((key) => {
-      queryParams[key] = params.get(key);
-    });
-    return queryParams;
-  }
-
   /** Client side routing */
   routing() {
     // Parses off any query strings from the url and sets a query string object
     // url ?hi=everyone
     // queryParams {hi: 'everyone'}
     router('*', (context, next) => {
-      this.queryParams = this.parseQueryParams(context);
+      this.queryParams = parseQueryParams(context);
       next();
     });
     // Browsing to / takes you to home
@@ -125,66 +108,12 @@ export class AppShell extends LitElement {
     if (super.updated) {
       super.updated();
     }
-    if (changedProperties.has('routeData') && this.routeData) {
-      if (this.routeData && this.routeData.params) {
-        this._routePageChanged(this.routeData.params.page);
-      }
+    if (changedProperties.has('routeData') && this.routeData && this.routeData.params) {
+      this.page = validatePage(this.routeData.params.page);
     }
     if (changedProperties.has('page')) {
-      this._importPage(this.page);
+      importPage(this.page);
     }
-  }
-
-  /**
-     * Triggered when the route changed, if page is an empty string, it will
-     * default to the home page, close any burger menus etc here
-     *
-     * @param {String} page the page the user is on
-     */
-  _routePageChanged(page) {
-    if (!page) {
-      this.page = 'home';
-    } else if (['home', 'error'].indexOf(page) !== -1) {
-      this.page = page;
-    } else {
-      this.page = 'error';
-    }
-  }
-
-  /**
-     * Lazy load the page in
-     *
-     * @param {String} page the page the user is on
-     */
-  _importPage(page) {
-    /*
-         * Import the page component on demand.
-         *
-         * Note: `build` doesn't like string concatenation in the import
-         * statement, so break it up.
-         */
-    switch (page) {
-      case 'error': {
-        import('./pages/error-page.js');
-        break;
-      }
-      case 'home': {
-        import('./pages/home-page.js');
-        break;
-      }
-      default: {
-        import('./pages/error-page.js');
-        break;
-      }
-    }
-  }
-
-  /**
-     * Sets the page to be the error one
-     *
-     */
-  _showPage404() {
-    this.page = 'error';
   }
 }
 

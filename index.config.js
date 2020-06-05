@@ -1,5 +1,5 @@
 const fs = require('fs');
-const minify = require('html-minifier').minify;
+const { minify } = require('html-minifier');
 
 const html = fs.readFileSync('./index.html');
 

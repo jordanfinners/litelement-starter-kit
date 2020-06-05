@@ -15,27 +15,69 @@
     "browser": true
   },
   "rules": {
-    "import/extensions": "off",
-    "no-underscore-dangle": "off",
+    "valid-jsdoc": "error",
+    "require-jsdoc": "error",
     "import/prefer-default-export": "off",
-    "class-methods-use-this": "off",
-    "prefer-destructuring": "off",
+    "import/extensions": [
+      "error",
+      {
+        "mjs": "ignorePackages"
+      }
+    ],
+    "class-methods-use-this": [
+      "error",
+      {
+        "exceptMethods": [
+          "render"
+        ]
+      }
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {
         "peerDependencies": true,
-        "devDependencies": ["**/tests/**/*.js", "karma.conf.js", "rollup.config.js", "rollup.test.config.js","service-worker.config.js", "index.config.js"]
+        "devDependencies": [
+          "src/**/*.test.js",
+          "karma.conf.js",
+          "rollup.config.js",
+          "rollup.test.config.js",
+          "service-worker.config.js",
+          "index.config.js",
+          "deploy.js"
+        ]
       }
-    ],
-    "valid-jsdoc": "error",
-    "require-jsdoc": "error"
+    ]
   },
+  "overrides": [
+    {
+      "files": [
+        "*.test.js"
+      ],
+      "rules": {
+        "no-use-before-define": "off",
+        "no-useless-escape": "off",
+        "no-unused-expressions": "off",
+        "import/no-extraneous-dependencies": "off",
+        "jsdoc/require-jsdoc": "off",
+        "no-unused-vars": [
+          "error",
+          {
+            "varsIgnorePattern": "it|expect|describe|beforeEach|afterEach"
+          }
+        ]
+      }
+    }
+  ],
   "plugins": [
     "html",
     "wc",
     "lit"
   ],
   "globals": {
-    "ShadyCSS": true
+    "ShadyCSS": true,
+    "describe": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "it": true
   }
 }

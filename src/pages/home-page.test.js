@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import '../../src/pages/home-page.js';
+import './home-page';
 
 describe('home-page tests', () => {
   let node;

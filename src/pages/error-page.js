@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element/lit-element.js';
+import { LitElement, html } from 'lit-element/lit-element';
 /**
  * `error-page`
  *  Error handling page e.g. browsing to a non existant page

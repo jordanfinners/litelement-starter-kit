@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
 
-import resolve from 'rollup-plugin-node-resolve';
-import common from 'rollup-plugin-commonjs';
-import multiEntry from 'rollup-plugin-multi-entry';
+import resolve from '@rollup/plugin-node-resolve';
+import common from '@rollup/plugin-commonjs';
+import multiEntry from '@rollup/plugin-multi-entry';
 
 
 export default {
-  input: 'tests/**/*.test.js',
+  input: 'src/**/*.test.js',
   output: {
-    dir: 'tests/bundle',
+    file: 'tests/bundle.js',
     format: 'esm',
     sourcemap: 'inline',
   },
+  inlineDynamicImports: true,
   cache: true,
   onwarn(warning) {
     if (warning.code !== 'CIRCULAR_DEPENDENCY') {
@@ -19,12 +20,12 @@ export default {
     }
   },
   plugins: [
+    multiEntry(),
     resolve(),
     common({
       namedExports: {
         chai: ['expect'],
       },
     }),
-    multiEntry(),
   ],
 };
