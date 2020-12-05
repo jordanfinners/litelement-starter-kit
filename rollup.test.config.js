@@ -4,7 +4,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import common from '@rollup/plugin-commonjs';
 import multiEntry from '@rollup/plugin-multi-entry';
 
-
 export default {
   input: 'src/**/*.test.js',
   output: {
