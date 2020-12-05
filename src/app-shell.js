@@ -35,7 +35,6 @@ export class AppShell extends LitElement {
 `;
   }
 
-
   /** Defines the elements properties */
   static get properties() {
     return {
@@ -98,7 +97,6 @@ export class AppShell extends LitElement {
     });
     router();
   }
-
 
   /**
    * Fired whenever any property changes and the template updates

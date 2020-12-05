@@ -42,6 +42,9 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-tap-highlight" content="no">
 
+  <!-- Anything to preload -->
+  <link rel="preload" href="/src/app-shell.js" as="script" crossorigin>
+
   <!-- Set up service worker -->
   <script>
     if ('serviceWorker' in navigator) {
@@ -51,19 +54,9 @@
     }
   </script>
 
-  <!-- Load babel polyfills -->
-  <script src="./node_modules/@babel/polyfill/dist/polyfill.min.js"></script>
-
-  <!-- Load Custom Elements es5 adapter -->
-  <script src="./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
-
-  <!-- Load webcomponents to check and load any polyfills your browser needs -->
-  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script src="/src/app-shell.js" type="module"></script>
 
   <!-- Add any fonts here (recommend async loading) -->
-
-  <!-- Load system modules for IE11 -->
-  <script nomodule src="./legacy/s.min.js"></script>
 
   <!-- Add any global styles for body, document, etc. -->
   <style>
@@ -91,36 +84,6 @@
   <noscript>
     Please enable JavaScript to view this website.
   </noscript>
-
-
-  <!-- Check if dynamic imports supported -->
-  <script type="module">
-    window.esDynamicImport = true;
-    // this will throw if dynamic import is not supported
-    import("./src/app-shell.js")
-  </script>
-
-  <!-- This will load in all the nomodule scripts for browsers that don't support lazy loading (imports not at the top level) e.g. Firefox -->
-  <script type="module">
-    if (!window.esDynamicImport) {
-      const noms = Array.prototype.slice.call(document.getElementsByTagName('script'), 0).filter((x) => x.hasAttribute('nomodule'));
-      function nextLoad(nom, s) {
-        if (!(nom = noms.shift())) return;
-        s = document.createElement('script');
-        if (nom.src)
-          s.src = nom.src, s.addEventListener('load', nextLoad), s.addEventListener('error', nextLoad);
-        else
-          s.innerHTML = nom.innerHTML;
-        document.head.appendChild(s);
-        if (!nom.src) nextLoad();
-      }
-      nextLoad();
-    }
-  </script>
-
-  <script nomodule>
-    System.import("./legacy/src/app-shell.js")
-  </script>
 </body>
 
 </html>
