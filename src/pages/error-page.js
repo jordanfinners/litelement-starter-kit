@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element/lit-element';
+import {LitElement, html} from 'lit-element/lit-element';
 /**
  * `error-page`
  *  Error handling page e.g. browsing to a non existant page
@@ -18,7 +18,7 @@ export class ErrorPage extends LitElement {
   static get properties() {
     return {
       /** The error messaging */
-      errorMessage: { type: String },
+      errorMessage: {type: String},
     };
   }
 

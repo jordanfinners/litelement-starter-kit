@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import * as assert from 'uvu/assert';
 import './error-page';
 
 describe('error-page tests', () => {
@@ -15,6 +15,6 @@ describe('error-page tests', () => {
 
   it('should set the default text', () => {
     const h2 = node.shadowRoot.querySelector('h2');
-    expect(h2.textContent).to.equal('Nobody panic!!!!');
+    assert.equal(h2.textContent, 'Nobody panic!!!!');
   });
 });

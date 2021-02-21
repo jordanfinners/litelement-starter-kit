@@ -2,28 +2,17 @@
   "extends": [
     "eslint:recommended",
     "google",
-    "eslint-config-airbnb-base",
     "plugin:wc/best-practice",
     "plugin:lit/recommended"
   ],
-  "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "env": {
     "browser": true
   },
   "rules": {
-    "valid-jsdoc": "error",
-    "require-jsdoc": "error",
-    "import/prefer-default-export": "off",
-    "import/extensions": [
-      "error",
-      {
-        "mjs": "ignorePackages"
-      }
-    ],
     "class-methods-use-this": [
       "error",
       {
@@ -31,50 +20,14 @@
           "render"
         ]
       }
-    ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "peerDependencies": true,
-        "devDependencies": [
-          "src/**/*.test.js",
-          "karma.conf.js",
-          "rollup.config.js",
-          "rollup.test.config.js",
-          "service-worker.config.js",
-          "index.config.js",
-          "deploy.js"
-        ]
-      }
     ]
   },
-  "overrides": [
-    {
-      "files": [
-        "*.test.js"
-      ],
-      "rules": {
-        "no-use-before-define": "off",
-        "no-useless-escape": "off",
-        "no-unused-expressions": "off",
-        "import/no-extraneous-dependencies": "off",
-        "jsdoc/require-jsdoc": "off",
-        "no-unused-vars": [
-          "error",
-          {
-            "varsIgnorePattern": "it|expect|describe|beforeEach|afterEach"
-          }
-        ]
-      }
-    }
-  ],
   "plugins": [
     "html",
     "wc",
     "lit"
   ],
   "globals": {
-    "ShadyCSS": true,
     "describe": true,
     "beforeEach": true,
     "afterEach": true,
