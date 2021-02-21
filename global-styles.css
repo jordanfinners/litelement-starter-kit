@@ -1,0 +1,26 @@
+html,
+:host>* {
+    --black-color: #444444;
+    --white-color: #ffffff;
+}
+
+[hidden] {
+    display: none;
+}
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    background-color: var(--white-color);
+    color: var(--black-color);
+}
+
+input,
+select,
+textarea,
+button,
+label {
+    font-family: inherit;
+}

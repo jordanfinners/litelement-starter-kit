@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import * as assert from 'uvu/assert';
 import './home-page';
 
 describe('home-page tests', () => {
@@ -15,6 +15,6 @@ describe('home-page tests', () => {
 
   it('should set the default text', () => {
     const h2 = node.shadowRoot.querySelector('h2');
-    expect(h2.textContent).to.equal('Welcome home');
+    assert.equal(h2.textContent, 'Welcome home');
   });
 });

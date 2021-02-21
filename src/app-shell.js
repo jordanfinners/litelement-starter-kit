@@ -1,7 +1,7 @@
-import { LitElement, html, css } from 'lit-element/lit-element';
+import {LitElement, html, css} from 'lit-element/lit-element';
 import router from 'page/page.mjs';
-import { parseQueryParams, validatePage, importPage } from './router';
-import { sharedStyles } from './shared-styles';
+import {parseQueryParams, validatePage, importPage} from './router';
+import {sharedStyles} from './shared-styles';
 
 /**
  * `app-shell`
@@ -28,10 +28,10 @@ export class AppShell extends LitElement {
    */
   render() {
     return html`
-            <main>
-              <home-page name="home" ?hidden=${this.page !== 'home'}></home-page>
-              <error-page name="error" ?hidden=${this.page !== 'error'}></error-page>
-            </main>
+      <main>
+        <home-page name="home" ?hidden=${this.page !== 'home'}></home-page>
+        <error-page name="error" ?hidden=${this.page !== 'error'}></error-page>
+      </main>
 `;
   }
 
@@ -39,11 +39,11 @@ export class AppShell extends LitElement {
   static get properties() {
     return {
       /** The page to display */
-      page: { type: String, reflect: true },
+      page: {type: String, reflect: true},
       /** The data parsed from the route url */
-      routeData: { type: Object },
+      routeData: {type: Object},
       /** If the user is authed */
-      queryParams: { type: Object },
+      queryParams: {type: Object},
     };
   }
 
@@ -82,7 +82,7 @@ export class AppShell extends LitElement {
     });
     // Browsing to / takes you to home
     router('/', (context) => {
-      const { ...routeData } = context;
+      const {...routeData} = context;
       routeData.params.page = 'home';
       this.routeData = routeData;
     });
@@ -106,7 +106,10 @@ export class AppShell extends LitElement {
     if (super.updated) {
       super.updated();
     }
-    if (changedProperties.has('routeData') && this.routeData && this.routeData.params) {
+    if (changedProperties.has('routeData') &&
+      this.routeData &&
+      this.routeData.params
+    ) {
       this.page = validatePage(this.routeData.params.page);
     }
     if (changedProperties.has('page')) {

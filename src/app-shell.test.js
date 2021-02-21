@@ -1,6 +1,4 @@
-import { expect } from 'chai';
-// This is how you import sinon is you need it
-// import sinon from 'sinon/pkg/sinon-esm.js';
+import * as assert from 'uvu/assert';
 import './app-shell';
 
 describe('app-shell tests', () => {
@@ -17,6 +15,6 @@ describe('app-shell tests', () => {
 
   it('should have a main section', () => {
     const main = node.shadowRoot.querySelector('main');
-    expect(main).to.exist;
+    assert.ok(main);
   });
 });
