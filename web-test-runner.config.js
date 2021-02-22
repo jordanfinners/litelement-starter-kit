@@ -5,15 +5,15 @@ export default {
   files: 'src/**/*.test.js',
   testFramework: {
     config: {
-      ui: 'bdd'
-    }
+      ui: 'bdd',
+    },
   },
   coverage: true,
   coverageConfig: {
     include: ['src/**/*.js'],
-    exclude: ['src/**/*.test.js']
+    exclude: ['src/**/*.test.js'],
   },
   browsers: [
-    puppeteerLauncher()
-  ]
+    puppeteerLauncher(),
+  ],
 };
